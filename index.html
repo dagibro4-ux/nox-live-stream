@@ -1,28 +1,112 @@
 <!DOCTYPE html>
-<html lang="am">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>የእኔ Live Streaming</title>
-    <!-- የቪዲዮ ማጫወቻው ዲዛይን -->
-    <link href="https://vjs.zencdn.net/8.3.0/video-js.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreamPlatform | Live Streaming</title>
+    <style>
+        /* General Styles */
+        body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0e0e10; color: white; }
+        
+        /* Ad Banner */
+        #ad-banner { background: #ffcc00; color: black; padding: 10px; text-align: center; font-weight: bold; font-size: 14px; }
+        
+        /* Navbar */
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: #18181b; border-bottom: 1px solid #333; }
+        .logo { font-size: 24px; font-weight: bold; color: #9147ff; }
+        .search-bar { padding: 8px; width: 300px; border-radius: 4px; border: none; background: #0e0e10; color: white; border: 1px solid #333; }
+        .nav-links a, .balance-display { margin-left: 20px; color: white; text-decoration: none; font-size: 14px; }
+        .balance-display { color: #00ff00; font-weight: bold; }
+
+        /* Main Container */
+        .container { display: flex; height: calc(100vh - 100px); }
+        .main-stream { flex: 1; padding: 20px; overflow-y: auto; }
+        
+        /* Video Area */
+        .video-box { width: 100%; height: 60vh; background: black; display: flex; align-items: center; justify-content: center; border-radius: 8px; }
+        
+        /* Gift Section */
+        .gift-section { margin-top: 20px; padding: 15px; background: #1f1f23; border-radius: 8px; }
+        .gift-btn { padding: 10px 15px; margin-right: 10px; border: none; border-radius: 5px; cursor: pointer; background: #9147ff; color: white; }
+        .gift-btn:hover { background: #772ce8; }
+
+        /* Chat Area */
+        .chat-area { width: 320px; background: #18181b; border-left: 1px solid #333; display: flex; flex-direction: column; }
+        .view-counter { background: red; padding: 2px 8px; border-radius: 4px; font-size: 12px; }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>ቀጥታ ስርጭት (Live Stream)</h1>
-    </header>
 
-    <main>
-        <!-- እዚህ ጋር ነው ቪዲዮው የሚጫወተው -->
-        <video-js id="my-live-player" class="vjs-default-skin" controls preload="auto" width="640" height="360">
-            <!-- የሰርቨሩ ማገናኛ (ይህ የሚሰራው ሰርቨሩ ሲሰራ ብቻ ነው) -->
-            <source src="http://localhost:8000/live/test/index.m3u8" type="application/x-mpegURL">
-        </video-js>
-    </main>
+    <!-- Ad Banner -->
+    <div id="ad-banner">
+        SPECIAL OFFER: Get 50% off on your first month subscription! <a href="#">Click here</a>
+    </div>
 
-    <!-- የቪዲዮ ማጫወቻው ሎጂክ -->
-    <script src="https://vjs.zencdn.net/8.3.0/video.js"></script>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">StreamFlow</div>
+        <input type="text" class="search-bar" placeholder="Search channels...">
+        <div class="nav-links">
+            <span class="balance-display">Balance: $<span id="balance">50.00</span></span>
+            <a href="#">Login</a>
+            <a href="#">Register</a>
+            <a href="#">Profile</a>
+            <a href="#">Settings</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <main class="main-stream">
+            <div class="video-box">
+                <!-- Replace with your embed code -->
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+            </div>
+            
+            <div style="margin-top: 15px;">
+                <h2>Live Stream Title</h2>
+                <span>Viewers: </span> <span id="view-count" class="view-counter">1240</span>
+            </div>
+
+            <!-- Gift Shop -->
+            <div class="gift-section">
+                <h3>Send a Gift</h3>
+                <button class="gift-btn" onclick="sendGift(5)">Rose ($5)</button>
+                <button class="gift-btn" onclick="sendGift(10)">Heart ($10)</button>
+                <button class="gift-btn" onclick="sendGift(20)">Star ($20)</button>
+            </div>
+        </main>
+
+        <!-- Sidebar Chat -->
+        <aside class="chat-area">
+            <div style="padding: 15px; border-bottom: 1px solid #333;">Live Chat</div>
+            <div style="padding: 10px;">User1: Wow!</div>
+            <div style="padding: 10px;">User2: Nice stream!</div>
+        </aside>
+    </div>
+
     <script>
-        var player = videojs('my-live-player');
+        // Viewer Counter Logic
+        let viewers = 1240;
+        setInterval(() => {
+            let randomAdd = Math.floor(Math.random() * (10 - 4 + 1)) + 4;
+            viewers += randomAdd;
+            document.getElementById('view-count').innerText = viewers.toLocaleString();
+        }, 60000); // Updates every 1 minute
+
+        // Balance & Gift Logic
+        let balance = 50.00;
+        function sendGift(amount) {
+            if (balance >= amount) {
+                balance -= amount;
+                document.getElementById('balance').innerText = balance.toFixed(2);
+                alert("Gift sent successfully!");
+            } else {
+                alert("Insufficient balance! Please top up.");
+            }
+        }
     </script>
+
 </body>
 </html>
+
