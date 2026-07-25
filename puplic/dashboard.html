@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dashboard - Kick Clone</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<div class="logo">
+<h2>Kick Clone</h2>
+</div>
+
+<nav>
+
+<a href="index.html">Home</a>
+
+<a href="stream.html">Stream</a>
+
+<a href="login.html" onclick="logout()">Logout</a>
+
+</nav>
+
+</header>
+
+
+
+<div class="dashboard">
+
+
+<aside class="sidebar">
+
+<h2>Dashboard</h2>
+
+<a href="#">Overview</a>
+
+<a href="#">My Streams</a>
+
+<a href="#">Revenue</a>
+
+<a href="#">Withdraw</a>
+
+<a href="#">Settings</a>
+
+</aside>
+
+
+
+<main class="content">
+
+
+<div class="profile">
+
+<img src="https://picsum.photos/100" alt="profile">
+
+<div>
+
+<h2 id="username">
+Streamer
+</h2>
+
+<p>
+Your Streaming Dashboard
+</p>
+
+</div>
+
+</div>
+
+
+
+<div class="stats">
+
+
+<div class="stat-card">
+
+<h3>Followers</h3>
+
+<span>
+1,250
+</span>
+
+</div>
+
+
+
+<div class="stat-card">
+
+<h3>Viewers</h3>
+
+<span id="viewer-count">
+325
+</span>
+
+</div>
+
+
+
+<div class="stat-card">
+
+<h3>Earnings</h3>
+
+<span>
+$0.00
+</span>
+
+</div>
+
+
+</div>
+
+
+
+
+<section style="margin-top:40px">
+
+
+<h2>
+Start Live Stream
+</h2>
+
+
+<div class="stat-card">
+
+
+<input 
+type="text"
+placeholder="Stream Title"
+style="width:100%;padding:15px;margin-bottom:15px;"
+>
+
+
+<select style="width:100%;padding:15px;">
+
+<option>
+Gaming
+</option>
+
+<option>
+Just Chatting
+</option>
+
+<option>
+Music
+</option>
+
+</select>
+
+
+<br><br>
+
+
+<button class="btn-green">
+
+Go Live
+
+</button>
+
+
+</div>
+
+
+</section>
+
+
+
+</main>
+
+
+</div>
+
+
+
+<script src="js/app.js"></script>
+
+
+<script>
+
+const user = JSON.parse(localStorage.getItem("user"));
+
+
+if(user){
+
+document.getElementById("username").innerHTML =
+user.username;
+
+}
+
+
+function logout(){
+
+localStorage.removeItem("token");
+
+localStorage.removeItem("user");
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
