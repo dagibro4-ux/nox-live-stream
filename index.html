@@ -1,139 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StreamFlow Pro - Live Platform</title>
-    <style>
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background-color: #0e0e10; color: white; }
-        
-        /* Navigation Bar */
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: #18181b; border-bottom: 1px solid #333; }
-        .logo { font-size: 24px; font-weight: bold; color: #9147ff; }
-        .search-bar { padding: 8px; width: 250px; border-radius: 4px; border: none; background: #0e0e10; color: white; border: 1px solid #333; }
-        .nav-links a { color: #ccc; margin-left: 15px; text-decoration: none; font-size: 14px; }
-        .balance-box { color: #00ff00; font-weight: bold; font-size: 16px; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kick Clone</title>
 
-        /* Main Layout */
-        .container { display: flex; padding: 20px; gap: 20px; }
-        .main-stream { flex: 1; }
-        .video-box { width: 100%; height: 50vh; background: #000; border: 2px dashed #444; display: flex; align-items: center; justify-content: center; }
-        
-        /* Sections */
-        .card { background: #18181b; padding: 20px; border-radius: 8px; margin-top: 20px; }
-        .btn { padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; color: white; margin: 5px; }
-        .btn-earn { background: #28a745; }
-        .btn-gift { background: #9147ff; }
-        
-        /* Chat Sidebar */
-        .chat-area { width: 320px; height: 70vh; background: #18181b; border-left: 1px solid #333; display: flex; flex-direction: column; }
-        .messages { flex: 1; padding: 10px; overflow-y: auto; font-size: 14px; }
-        .msg { margin-bottom: 8px; }
-        .username { color: #ffcc00; font-weight: bold; }
-    </style>
+<link rel="stylesheet" href="css/style.css">
+
 </head>
 <body>
 
-    <nav>
-        <div class="logo">StreamFlow</div>
-        <input type="text" class="search-bar" placeholder="Search...">
-        <div class="nav-links">
-            <span class="balance-box">Balance: <span id="balance">$0.00</span></span>
-            <a href="#">Profile</a> <a href="#">Settings</a>
-        </div>
-    </nav>
+<header>
 
-    <div class="container">
-        <main class="main-stream">
-            <div class="video-box">
-                <p>Live Stream Placeholder</p>
-            </div>
-            
-            <div style="margin-top: 10px;">
-                <span>Viewers: </span> <span id="view-count" style="color: red; font-weight: bold;">1240</span>
-            </div>
+<div class="logo">
+    <h2>Kick Clone</h2>
+</div>
 
-            <!-- Stream Credentials -->
-            <div class="card">
-                <h3>Setup Your Live Stream</h3>
-                <button onclick="generateKeys()" class="btn" style="background:#555">Generate Stream URL & Key</button>
-                <div id="stream-info" style="display: none; margin-top: 10px;">
-                    <p><strong>Stream URL:</strong> rtmp://live-streamflow.com/app</p>
-                    <p><strong>Stream Key:</strong> <code id="key-display" style="color: #ffcc00;"></code></p>
-                </div>
-            </div>
+<nav>
 
-            <!-- Earning System -->
-            <div class="card">
-                <h3>Earn Balance</h3>
-                <button class="btn btn-earn" onclick="earnMoney()">Watch Ad (+ $0.50)</button>
-            </div>
+<a href="index.html">Home</a>
 
-            <!-- Gift Shop -->
-            <div class="card">
-                <h3>Send a Gift</h3>
-                <button class="btn btn-gift" onclick="sendGift(0.10)">Coffee ($0.10)</button>
-                <button class="btn btn-gift" onclick="sendGift(0.50)">Like ($0.50)</button>
-                <button class="btn btn-gift" onclick="sendGift(1.00)">Clap ($1.00)</button>
-            </div>
-        </main>
+<a href="streams.html">Live Streams</a>
 
-        <aside class="chat-area">
-            <div style="padding: 15px; border-bottom: 1px solid #333; font-weight: bold;">Live Chat</div>
-            <div id="chat-box" class="messages"></div>
-        </aside>
-    </div>
+<a href="login.html">Login</a>
 
-    <script>
-        let balance = 0.00;
-        let viewers = 1240;
+<a href="register.html">Register</a>
 
-        // Earning Logic
-        function earnMoney() {
-            balance += 0.50;
-            document.getElementById('balance').innerText = "$" + balance.toFixed(2);
-        }
+<a href="dashboard.html" class="start">Start Streaming</a>
 
-        // Gift Logic
-        function sendGift(amount) {
-            if (balance >= amount) {
-                balance -= amount;
-                document.getElementById('balance').innerText = "$" + balance.toFixed(2);
-                alert("Gift sent successfully!");
-            } else {
-                alert("Insufficient balance! Watch more ads to earn.");
-            }
-        }
+</nav>
 
-        // Stream Key Logic
-        function generateKeys() {
-            const key = "live_" + Math.random().toString(36).substring(2, 12).toUpperCase();
-            document.getElementById('key-display').innerText = key;
-            document.getElementById('stream-info').style.display = 'block';
-        }
+</header>
 
-        // Viewer Counter Logic
-        setInterval(() => {
-            viewers += Math.floor(Math.random() * (10 - 4 + 1)) + 4;
-            document.getElementById('view-count').innerText = viewers.toLocaleString();
-        }, 60000);
 
-        // Chat Logic
-        const names = ["Abel", "Sara", "Dawit", "Tigist", "Bereket", "Mimi", "John", "Fanuel"];
-        const comments = ["Awesome stream!", "Great content!", "Love it!", "How are you?", "Playing games?", "Nice music!", "First!"];
-        
-        setInterval(() => {
-            const chatBox = document.getElementById('chat-box');
-            const name = names[Math.floor(Math.random() * names.length)];
-            const comment = comments[Math.floor(Math.random() * comments.length)];
-            
-            const div = document.createElement('div');
-            div.className = 'msg';
-            div.innerHTML = `<span class="username">${name}:</span> ${comment}`;
-            chatBox.appendChild(div);
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }, 2500);
-    </script>
+<section class="hero">
+
+<h1>Watch Live Streams</h1>
+
+<p>Discover streamers around the world.</p>
+
+<a href="streams.html" class="btn">Watch Now</a>
+
+</section>
+
+
+
+<section class="live">
+
+<h2>Live Now</h2>
+
+<div class="cards">
+
+<div class="card">
+
+<img src="https://picsum.photos/400/220" alt="">
+
+<h3>Streamer 1</h3>
+
+<p>Playing GTA V</p>
+
+<button>Watch</button>
+
+</div>
+
+<div class="card">
+
+<img src="https://picsum.photos/401/220" alt="">
+
+<h3>Streamer 2</h3>
+
+<p>Just Chatting</p>
+
+<button>Watch</button>
+
+</div>
+
+<div class="card">
+
+<img src="https://picsum.photos/402/220" alt="">
+
+<h3>Streamer 3</h3>
+
+<p>EA FC 26</p>
+
+<button>Watch</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section class="features">
+
+<h2>Features</h2>
+
+<div class="feature-box">
+
+<div>
+
+<h3>Live Streaming</h3>
+
+<p>Broadcast your gameplay.</p>
+
+</div>
+
+<div>
+
+<h3>Live Chat</h3>
+
+<p>Chat with viewers instantly.</p>
+
+</div>
+
+<div>
+
+<h3>Earn Money</h3>
+
+<p>Receive ad revenue and donations.</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<footer>
+
+<p>© 2026 Kick Clone</p>
+
+</footer>
+
+<script src="js/app.js"></script>
+
 </body>
 </html>
-
