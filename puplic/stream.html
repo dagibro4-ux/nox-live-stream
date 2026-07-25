@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Live Stream - Kick Clone</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<div class="logo">
+<h2>Kick Clone</h2>
+</div>
+
+
+<nav>
+
+<a href="index.html">Home</a>
+
+<a href="dashboard.html">Dashboard</a>
+
+</nav>
+
+</header>
+
+
+
+
+<div class="stream-wrapper">
+
+
+<div class="video-box">
+
+
+<video id="videoPlayer" controls>
+
+<source src="" type="video/mp4">
+
+Your browser does not support video.
+
+</video>
+
+
+
+<div class="stream-info">
+
+<span class="badge">
+LIVE
+</span>
+
+
+<h2>
+Gaming Stream
+</h2>
+
+
+<p>
+Streamer: 
+<span id="streamerName">
+Streamer
+</span>
+</p>
+
+
+<p>
+Viewers:
+<span id="viewer-count">
+325
+</span>
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="chat-box">
+
+
+<div class="chat-header">
+
+Live Chat
+
+</div>
+
+
+
+<div class="chat-messages" id="messages">
+
+
+<div class="message">
+
+<strong>User1</strong>
+
+<p>Hello everyone!</p>
+
+</div>
+
+
+</div>
+
+
+
+
+<div class="chat-input">
+
+
+<input 
+id="message"
+type="text"
+placeholder="Send message..."
+>
+
+
+<button id="send-message">
+Send
+</button>
+
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+<script src="js/app.js"></script>
+
+<script src="js/chat.js"></script>
+
+
+</body>
+
+</html>
