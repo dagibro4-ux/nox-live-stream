@@ -3,110 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StreamPlatform | Live Streaming</title>
+    <title>StreamFlow Pro - Live Platform</title>
     <style>
-        /* General Styles */
-        body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0e0e10; color: white; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background-color: #0e0e10; color: white; }
         
-        /* Ad Banner */
-        #ad-banner { background: #ffcc00; color: black; padding: 10px; text-align: center; font-weight: bold; font-size: 14px; }
-        
-        /* Navbar */
+        /* Navigation Bar */
         nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: #18181b; border-bottom: 1px solid #333; }
         .logo { font-size: 24px; font-weight: bold; color: #9147ff; }
-        .search-bar { padding: 8px; width: 300px; border-radius: 4px; border: none; background: #0e0e10; color: white; border: 1px solid #333; }
-        .nav-links a, .balance-display { margin-left: 20px; color: white; text-decoration: none; font-size: 14px; }
-        .balance-display { color: #00ff00; font-weight: bold; }
+        .search-bar { padding: 8px; width: 250px; border-radius: 4px; border: none; background: #0e0e10; color: white; border: 1px solid #333; }
+        .nav-links a { color: #ccc; margin-left: 15px; text-decoration: none; font-size: 14px; }
+        .balance-box { color: #00ff00; font-weight: bold; font-size: 16px; }
 
-        /* Main Container */
-        .container { display: flex; height: calc(100vh - 100px); }
-        .main-stream { flex: 1; padding: 20px; overflow-y: auto; }
+        /* Main Layout */
+        .container { display: flex; padding: 20px; gap: 20px; }
+        .main-stream { flex: 1; }
+        .video-box { width: 100%; height: 50vh; background: #000; border: 2px dashed #444; display: flex; align-items: center; justify-content: center; }
         
-        /* Video Area */
-        .video-box { width: 100%; height: 60vh; background: black; display: flex; align-items: center; justify-content: center; border-radius: 8px; }
+        /* Sections */
+        .card { background: #18181b; padding: 20px; border-radius: 8px; margin-top: 20px; }
+        .btn { padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; color: white; margin: 5px; }
+        .btn-earn { background: #28a745; }
+        .btn-gift { background: #9147ff; }
         
-        /* Gift Section */
-        .gift-section { margin-top: 20px; padding: 15px; background: #1f1f23; border-radius: 8px; }
-        .gift-btn { padding: 10px 15px; margin-right: 10px; border: none; border-radius: 5px; cursor: pointer; background: #9147ff; color: white; }
-        .gift-btn:hover { background: #772ce8; }
-
-        /* Chat Area */
-        .chat-area { width: 320px; background: #18181b; border-left: 1px solid #333; display: flex; flex-direction: column; }
-        .view-counter { background: red; padding: 2px 8px; border-radius: 4px; font-size: 12px; }
+        /* Chat Sidebar */
+        .chat-area { width: 320px; height: 70vh; background: #18181b; border-left: 1px solid #333; display: flex; flex-direction: column; }
+        .messages { flex: 1; padding: 10px; overflow-y: auto; font-size: 14px; }
+        .msg { margin-bottom: 8px; }
+        .username { color: #ffcc00; font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <!-- Ad Banner -->
-    <div id="ad-banner">
-        SPECIAL OFFER: Get 50% off on your first month subscription! <a href="#">Click here</a>
-    </div>
-
-    <!-- Navigation -->
     <nav>
         <div class="logo">StreamFlow</div>
-        <input type="text" class="search-bar" placeholder="Search channels...">
+        <input type="text" class="search-bar" placeholder="Search...">
         <div class="nav-links">
-            <span class="balance-display">Balance: $<span id="balance">50.00</span></span>
-            <a href="#">Login</a>
-            <a href="#">Register</a>
-            <a href="#">Profile</a>
-            <a href="#">Settings</a>
+            <span class="balance-box">Balance: <span id="balance">$0.00</span></span>
+            <a href="#">Profile</a> <a href="#">Settings</a>
         </div>
     </nav>
 
-    <!-- Main Content -->
     <div class="container">
         <main class="main-stream">
             <div class="video-box">
-                <!-- Replace with your embed code -->
-                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+                <p>Live Stream Placeholder</p>
             </div>
             
-            <div style="margin-top: 15px;">
-                <h2>Live Stream Title</h2>
-                <span>Viewers: </span> <span id="view-count" class="view-counter">1240</span>
+            <div style="margin-top: 10px;">
+                <span>Viewers: </span> <span id="view-count" style="color: red; font-weight: bold;">1240</span>
+            </div>
+
+            <!-- Stream Credentials -->
+            <div class="card">
+                <h3>Setup Your Live Stream</h3>
+                <button onclick="generateKeys()" class="btn" style="background:#555">Generate Stream URL & Key</button>
+                <div id="stream-info" style="display: none; margin-top: 10px;">
+                    <p><strong>Stream URL:</strong> rtmp://live-streamflow.com/app</p>
+                    <p><strong>Stream Key:</strong> <code id="key-display" style="color: #ffcc00;"></code></p>
+                </div>
+            </div>
+
+            <!-- Earning System -->
+            <div class="card">
+                <h3>Earn Balance</h3>
+                <button class="btn btn-earn" onclick="earnMoney()">Watch Ad (+ $0.50)</button>
             </div>
 
             <!-- Gift Shop -->
-            <div class="gift-section">
+            <div class="card">
                 <h3>Send a Gift</h3>
-                <button class="gift-btn" onclick="sendGift(5)">Rose ($5)</button>
-                <button class="gift-btn" onclick="sendGift(10)">Heart ($10)</button>
-                <button class="gift-btn" onclick="sendGift(20)">Star ($20)</button>
+                <button class="btn btn-gift" onclick="sendGift(0.10)">Coffee ($0.10)</button>
+                <button class="btn btn-gift" onclick="sendGift(0.50)">Like ($0.50)</button>
+                <button class="btn btn-gift" onclick="sendGift(1.00)">Clap ($1.00)</button>
             </div>
         </main>
 
-        <!-- Sidebar Chat -->
         <aside class="chat-area">
-            <div style="padding: 15px; border-bottom: 1px solid #333;">Live Chat</div>
-            <div style="padding: 10px;">User1: Wow!</div>
-            <div style="padding: 10px;">User2: Nice stream!</div>
+            <div style="padding: 15px; border-bottom: 1px solid #333; font-weight: bold;">Live Chat</div>
+            <div id="chat-box" class="messages"></div>
         </aside>
     </div>
 
     <script>
-        // Viewer Counter Logic
+        let balance = 0.00;
         let viewers = 1240;
-        setInterval(() => {
-            let randomAdd = Math.floor(Math.random() * (10 - 4 + 1)) + 4;
-            viewers += randomAdd;
-            document.getElementById('view-count').innerText = viewers.toLocaleString();
-        }, 60000); // Updates every 1 minute
 
-        // Balance & Gift Logic
-        let balance = 50.00;
+        // Earning Logic
+        function earnMoney() {
+            balance += 0.50;
+            document.getElementById('balance').innerText = "$" + balance.toFixed(2);
+        }
+
+        // Gift Logic
         function sendGift(amount) {
             if (balance >= amount) {
                 balance -= amount;
-                document.getElementById('balance').innerText = balance.toFixed(2);
+                document.getElementById('balance').innerText = "$" + balance.toFixed(2);
                 alert("Gift sent successfully!");
             } else {
-                alert("Insufficient balance! Please top up.");
+                alert("Insufficient balance! Watch more ads to earn.");
             }
         }
-    </script>
 
+        // Stream Key Logic
+        function generateKeys() {
+            const key = "live_" + Math.random().toString(36).substring(2, 12).toUpperCase();
+            document.getElementById('key-display').innerText = key;
+            document.getElementById('stream-info').style.display = 'block';
+        }
+
+        // Viewer Counter Logic
+        setInterval(() => {
+            viewers += Math.floor(Math.random() * (10 - 4 + 1)) + 4;
+            document.getElementById('view-count').innerText = viewers.toLocaleString();
+        }, 60000);
+
+        // Chat Logic
+        const names = ["Abel", "Sara", "Dawit", "Tigist", "Bereket", "Mimi", "John", "Fanuel"];
+        const comments = ["Awesome stream!", "Great content!", "Love it!", "How are you?", "Playing games?", "Nice music!", "First!"];
+        
+        setInterval(() => {
+            const chatBox = document.getElementById('chat-box');
+            const name = names[Math.floor(Math.random() * names.length)];
+            const comment = comments[Math.floor(Math.random() * comments.length)];
+            
+            const div = document.createElement('div');
+            div.className = 'msg';
+            div.innerHTML = `<span class="username">${name}:</span> ${comment}`;
+            chatBox.appendChild(div);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }, 2500);
+    </script>
 </body>
 </html>
 
