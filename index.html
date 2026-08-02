@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="am">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Video with Centered Ad — Nox Live Stream</title>
+
+  <!--
+    Note: For local testing we allow 'unsafe-inline' so the inline scripts/styles work.
+    In production prefer using HTTP headers for CSP and avoid 'unsafe-inline'.
+    Adjust domains if needed.
+  -->
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self' data:; script-src 'self' 'unsafe-inline' https://pl30526720.effectivecpmnetwork.com; connect-src 'self' https://pl30526720.effectivecpmnetwork.com; img-src 'self' data: https://pl30526720.effectivecpmnetwork.com; style-src 'self' 'unsafe-inline';">
+
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header>
+    <h1>Nox Live Stream — Video with Centered Ad</h1>
+  </header>
+
+  <main>
+    <div class="video-wrapper" aria-label="Video player with ad">
+      <!-- Replace sample.mp4 and poster.jpg with your real files -->
+      <video id="player" controls preload="metadata" poster="/poster.jpg" crossorigin="anonymous">
+        <source src="/sample.mp4" type="video/mp4">
+        እባክዎ አውታረ መተግበሪያ ይምረጡ — ይህ አልተደገፈም በዩሲር አለኝ.
+      </video>
+
+      <!-- Ad overlay shown centered on the video -->
+      <div id="ad-container" class="ad-overlay hidden" aria-hidden="true" role="region" aria-label="Ad">
+        <button class="close-btn" id="closeAdBtn" title="Close ad" aria-label="Close ad">×</button>
+        <div id="ad-inject" class="ad-inject" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <div class="controls" aria-hidden="false">
+      <button id="loadAdNow">Load Ad Now (manual)</button>
+      <button id="clearConsent">Clear Consent (test)</button>
+    </div>
+  </main>
+
+  <!-- Cookie / consent banner -->
+  <div id="consent-banner" class="consent-banner hidden" role="dialog" aria-live="polite" aria-modal="false">
+    <div class="consent-text">
+      ይህ ገጽ ሶስት-አማካይ (third-party) አድ እና ትረካ ሳይንስ ሊጠቀም ይችላል። የተጠቃሚ ፈቃድ ከሰጠዎ ብቻ አድ ይጫኑ።
+    </div>
+    <div class="consent-actions">
+      <button id="acceptConsent" class="accept">ፈቀድ</button>
+      <button id="declineConsent" class="decline">አልፈቀድም</button>
+    </div>
+  </div>
+
+  <footer>
+    Sample page — replace sample.mp4 and poster.jpg with your media files. For production, update CSP headers & privacy policy.
+  </footer>
+
+  <script src="/consent.js"></script>
+  <script src="/load-ad.js"></script>
+  <script>
+    // small init: load ad on first play if consent given
+    document.addEventListener('DOMContentLoaded', function(){
+      const player = document.getElementById('player');
+      function onFirstPlay(){
+        if (window.AdConsent && window.AdConsent.isConsented()){
+          window.AdLoader.loadInto('ad-inject');
+        } else {
+          window.AdConsent.showBanner();
+        }
+        player.removeEventListener('play', onFirstPlay);
+      }
+      player.addEventListener('play', onFirstPlay);
+
+      // manual load button works after DOM ready
+      document.getElementById('loadAdNow').addEventListener('click', function(){
+        if (window.AdConsent && window.AdConsent.isConsented()){
+          window.AdLoader.loadInto('ad-inject');
+          document.getElementById('ad-container').classList.remove('hidden');
+        } else {
+          window.AdConsent.showBanner();
+        }
+      });
+
+      document.getElementById('closeAdBtn').addEventListener('click', function(){
+        document.getElementById('ad-container').classList.add('hidden');
+        const inject = document.getElementById('ad-inject'); if (inject) inject.innerHTML = '';
+      });
+
+      document.getElementById('clearConsent').addEventListener('click', function(){
+        window.AdConsent.clear();
+        alert('Consent cleared (testing). Reload page to see banner again.');
+      });
+    });
+  </script>
+</body>
+</html>
