@@ -13,7 +13,7 @@
   <meta http-equiv="Content-Security-Policy"
     content="default-src 'self' data:; script-src 'self' 'unsafe-inline' https://pl30526720.effectivecpmnetwork.com; connect-src 'self' https://pl30526720.effectivecpmnetwork.com; img-src 'self' data: https://pl30526720.effectivecpmnetwork.com; style-src 'self' 'unsafe-inline';">
 
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header>
@@ -23,8 +23,8 @@
   <main>
     <div class="video-wrapper" aria-label="Video player with ad">
       <!-- Replace sample.mp4 and poster.jpg with your real files -->
-      <video id="player" controls preload="metadata" poster="/poster.jpg" crossorigin="anonymous">
-        <source src="/sample.mp4" type="video/mp4">
+      <video id="player" controls preload="metadata" poster="poster.jpg" crossorigin="anonymous">
+        <source src="sample.mp4" type="video/mp4">
         እባክዎ አውታረ መተግበሪያ ይምረጡ — ይህ አልተደገፈም በዩሲር አለኝ.
       </video>
 
@@ -56,8 +56,8 @@
     Sample page — replace sample.mp4 and poster.jpg with your media files. For production, update CSP headers & privacy policy.
   </footer>
 
-  <script src="/consent.js"></script>
-  <script src="/load-ad.js"></script>
+  <script src="consent.js"></script>
+  <script src="load-ad.js"></script>
   <script>
     // small init: load ad on first play if consent given
     document.addEventListener('DOMContentLoaded', function(){
@@ -74,7 +74,7 @@
 
       // manual load button works after DOM ready
       document.getElementById('loadAdNow').addEventListener('click', function(){
-        if (window.AdConsent && window.AdConsent.isConsented()){
+        if (AdConsent.isConsented()){
           window.AdLoader.loadInto('ad-inject');
           document.getElementById('ad-container').classList.remove('hidden');
         } else {
